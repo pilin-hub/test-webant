@@ -1,0 +1,10 @@
+pm_api_url = "https://192.168.0.13:8006/api2/json"
+# PM_USER="terraform_user@pve"
+# PM_PASS=""
+ssh_key = ""
+storage_name = "toshiba"
+#PM_PASS=""
+#PM_USER="terraform-prov@pve"
+# proxmox_api_url = "https://192.168.0.13:8006/api2/json"
+# proxmox_api_token_id = "terraform@pam!terraform"
+# proxmox_api_token_secret = 

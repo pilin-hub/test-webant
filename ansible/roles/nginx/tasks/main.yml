@@ -1,0 +1,17 @@
+---
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+
+- name: Copy Configure Nginx for Load Balancing
+  template:
+    src:  /home/pilin_wsl/new_ansible/roles/nginx/templates/default.conf
+    dest: /etc/nginx/sites-available/wp.local
+
+- name: Restart Nginx
+  systemd:
+    name: nginx
+    state: restarted
+    enabled: true

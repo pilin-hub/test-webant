@@ -1,0 +1,7 @@
+---
+root_password: root
+admin_user: admin
+admin_password: admin1
+db_name: wordpress
+password_validation_policy: 1 
+db_host: 172.16.30.10    
