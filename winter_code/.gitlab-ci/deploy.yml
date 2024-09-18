@@ -1,0 +1,33 @@
+---
+get-image-job:
+  extends: .show_env_vars
+  stage: deploy
+  rules:
+  environment: $ENVIRONMENT
+  needs:
+    - prepare-docker-compose-file
+  tags:
+    - $ENVIRONMENT-$CI_PROJECT_NAME
+  before_script:
+     - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
+  script:
+    - cd $SERVICE_PATH
+    - docker pull $IMAGE_NAME
+  after_script:
+    - docker logout $CI_REGISTRY
+    - docker image prune -f
+
+deploy-job:
+  extends: .show_env_vars
+  stage: deploy
+  environment: $ENVIRONMENT
+  needs:
+    - build-job
+    - get-image-job
+  tags:
+    - $ENVIRONMENT-$CI_PROJECT_NAME
+  script:
+    - cd $SERVICE_PATH
+    - docker compose down
+    - docker compose up -d
+

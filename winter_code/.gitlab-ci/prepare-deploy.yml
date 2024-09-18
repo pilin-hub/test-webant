@@ -1,0 +1,13 @@
+---
+prepare-docker-compose-file:
+  stage: prepare-deploy
+  extends: .show_env_vars
+  environment: $ENVIRONMENT
+  tags:
+    - $ENVIRONMENT-$CI_PROJECT_NAME
+  script:
+    - mkdir -p $SERVICE_PATH
+    - cd $SERVICE_PATH
+    - cp $CI_PROJECT_DIR/.docker-compose/* .
+    - env -0 | sort -z | tr '\0' '\n' > .env
+    - cat $env >> .env

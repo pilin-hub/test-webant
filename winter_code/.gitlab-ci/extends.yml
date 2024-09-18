@@ -1,0 +1,4 @@
+---
+.show_env_vars:
+  before_script:
+    - env -0 | sort -z | tr '\0' '\n'
